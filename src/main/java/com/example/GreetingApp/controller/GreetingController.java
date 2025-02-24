@@ -88,40 +88,4 @@ public class GreetingController {
         return greetingService.getAllGreetings();
     }
 
-    //Endpoint to edit an existing greeting message
-    @PutMapping("/editGreeting")
-    public Greeting editGreeting(@RequestParam String firstName,
-                                 @RequestParam String lastName,
-                                 @RequestParam String newMessage) {
-        Greeting updatedGreeting = greetingService.editGreetingMessage(firstName, lastName, newMessage);
-        if (updatedGreeting != null) {
-            return updatedGreeting;  //Return the updated greeting
-        } else {
-            //If the greeting wasn't found, return an error message or null
-            return null;
-        }
-    }
-
-    //Endpoint to delete a greeting message
-    @DeleteMapping("/deleteGreeting")
-    public String deleteGreeting(@RequestParam String firstName, @RequestParam String lastName) {
-        boolean deleted = greetingService.deleteGreetingMessage(firstName, lastName);
-        if (deleted) {
-            return "{\"message\": \"Greeting deleted successfully!\"}";
-        } else {
-            return "{\"message\": \"Greeting not found!\"}";
-        }
-    }
-
-    //Endpoint to find a greeting message by name
-    @GetMapping("/findGreeting")
-    public String findGreeting(@RequestParam String firstName, @RequestParam String lastName) {
-        Greeting greeting = greetingService.findGreetingByName(firstName, lastName);
-        if (greeting != null) {
-            return "{\"message\": \"" + greeting.getMessage() + "\"}";
-        } else {
-            return "{\"message\": \"Greeting not found!\"}";
-        }
-    }
-
 }
